@@ -3,7 +3,7 @@
 cd $(dirname "$0")
 pwd
 
-API=KSP_API
+API=../KSP_API
 echo "Cleaning .cs files in $API"
 
 files="$(find "$API" -name "*.cs")"
