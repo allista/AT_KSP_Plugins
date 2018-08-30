@@ -1,0 +1,50 @@
+#!/usr/bin/python
+# coding=utf-8
+
+import os, shutil
+
+releases = 'Releases'
+
+class filestamp(object):
+    def __init__(self, filepath):
+        self.path = filepath
+        self.time = os.path.getmtime(filepath)
+
+    def __lt__(self, other):
+        return self.time < other.time
+
+    def __gt__(self, other):
+        return self.time > other.time
+
+    def __str__(self):
+        return self.path
+
+
+if __name__ == '__main__':
+    cdir = os.path.abspath(os.curdir)
+    repo = os.path.join(cdir, 'AllReleases')
+    if not os.path.isdir(repo): os.mkdir(repo)
+    print('Repo: '+repo)
+    start_dirs = []
+    print('Searching for releases...')
+    for dirname, dirs, files in os.walk('.'):
+        if dirname.endswith(releases) and os.path.abspath(dirname) != repo:
+            start_dirs.append(dirname)
+    print('Gathering all newest releases:')
+    for dirname in start_dirs:
+        os.chdir(dirname)
+        newest_zip = None
+        for filename in os.listdir('.'):
+            if filename.endswith('.zip'):
+                newstamp = filestamp(filename)
+                if newest_zip is None or newstamp > newest_zip:
+                    newest_zip = newstamp
+        if newest_zip is not None:
+            try:
+                shutil.copy(newest_zip.path, repo)
+                print('%s copied' % newest_zip.path)
+            except shutil.Error as e:
+                print('Error while copying %s:\n\t%s' % (os.path.join(dirname, newest_zip.path), str(e)))
+        os.chdir(cdir)
+    print('Done.')
+

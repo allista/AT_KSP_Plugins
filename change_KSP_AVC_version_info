@@ -1,0 +1,41 @@
+#!/usr/bin/python
+# coding=utf-8
+
+"""
+Created on Dec 3, 2015
+
+@author: Allis Tauri <allista@gmail.com>
+"""
+
+from __future__ import print_function
+
+import os, re
+import argparse
+
+KSP_Version_re = re.compile(r'(\s*M(in|ax)KSPVersion = new Version)\((\d+,\d+(,\d+)?)\);')
+version_re = re.compile(r'^\d+,\d+(,\d+)?$')
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Changes Min/Max KSP version in AssemblyInfo.cs files')
+    parser.add_argument('version', type=str,
+                        help='New KSP version number.')
+    args = parser.parse_args()
+    version = args.version.replace('.', ',').strip()
+    if version_re.match(version) is None:
+        print('Invalid version number.\n'
+              'Should be N.N[.N] but %s provided' % version)
+    print('New version: '+version)
+    cdir = os.path.abspath(os.curdir)
+    print('Searching for AssemblyInfo.cs files...')
+    for dirname, dirs, files in os.walk('.'):
+        for filename in files:
+            if filename != 'AssemblyInfo.cs': continue
+            filepath = os.path.join(dirname, filename)
+            with open(filepath, 'rb') as inp:
+                text = inp.read()
+            text1 = KSP_Version_re.sub(r'\1(%s);' % version, text)
+            if text1 != text:
+                print('Changed version in %s' % filepath)
+                with open(filepath, 'wb') as out:
+                    out.write(text1)
+

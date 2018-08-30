@@ -1,0 +1,31 @@
+#!/usr/bin/python3
+# coding=utf-8
+
+import os
+from subprocess import Popen, PIPE
+
+prog = 'make-release.sh'
+
+if __name__ == '__main__':
+    cdir = os.path.abspath(os.curdir)
+    start_dirs = []
+    for dirname, dirs, files in os.walk('.'):
+        for filename in files:
+            if filename == prog:
+                start_dirs.append(dirname)
+    processes = []
+    filename = os.path.join('.', prog)
+    for dirname in start_dirs:
+        print('Launching %s in %s' % (prog, dirname))
+        os.chdir(dirname)
+        prc = Popen(filename, stderr=PIPE, stdout=PIPE, shell=True)
+        processes.append((dirname, prc))
+        os.chdir(cdir)
+    print('\n')
+    for dirname, prc in processes:
+        prc.wait()
+        stderr = prc.stderr.read()
+        stdout = prc.stdout.read()
+        if stderr or stdout:
+            print('\n'.join(txt.decode('utf8') for txt in (stderr, stdout) if txt))
+        print('%s: %s returned %d\n\n' % (dirname, prog, prc.returncode))

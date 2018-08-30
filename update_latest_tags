@@ -1,0 +1,61 @@
+#!/usr/bin/python
+# coding=utf-8
+
+"""
+Created on Jun 5, 2017
+
+@author: Allis Tauri <allista@gmail.com>
+"""
+
+from __future__ import print_function
+
+import os
+import argparse
+
+from git import Repo, InvalidGitRepositoryError, RemoteProgress, GitCommandError
+
+
+class ProgressPrinter(RemoteProgress):
+    def update(self, op_code, cur_count, max_count=None, message=''):
+        if message: print('%.1f%% %s' % (cur_count / (max_count or 100.0) * 100.0, message))
+
+
+def push_and_print(remote, *args, **kwargs):
+    kwargs['progress']=ProgressPrinter()
+    try:
+        pinfo = remote.push(*args, **kwargs)
+        for i in pinfo: print(i.summary)
+    except GitCommandError as e: print(str(e))
+
+
+if __name__ == '__main__':
+    cdir = os.path.abspath(os.curdir)
+    repos = []
+    print('Searching for git repos...')
+    for dirname, dirs, files in os.walk('.'):
+        # check repository
+        if '.git' in dirname: continue
+        try: repo = Repo(dirname)
+        except InvalidGitRepositoryError: continue
+        except Exception as e:
+            print(str(e))
+            continue
+        if repo.bare: continue
+        repos.append(repo)
+    print('Updating active branches...')
+    for repo in repos:
+        # push to origin
+        try: ori = repo.remotes.origin
+        except AttributeError: continue
+        try: branch = repo.active_branch
+        except TypeError: branch = repo.head
+        print('\n%s: pushing %s to %s' % (os.path.relpath(repo.working_dir, cdir),
+                                          branch, ori.name))
+        push_and_print(ori, f=True)
+        # get latest tag
+        t = repo.tags[-1].name if repo.tags else None
+        if t:
+            new_tag = repo.create_tag(t, force=True)
+            print('Updating %s to %s' % (t, branch.commit.message.strip()))
+            push_and_print(ori, new_tag, f=True)
+    print('Done.')
