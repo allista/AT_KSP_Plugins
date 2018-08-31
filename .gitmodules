@@ -1,0 +1,12 @@
+[submodule "ThrottleControlledAvionics"]
+	path = ThrottleControlledAvionics
+	url = git@github.com:allista/ThrottleControlledAvionics.git
+[submodule "Hangar"]
+	path = Hangar
+	url = git@github.com:allista/hangar.git
+[submodule "AT_Utils"]
+	path = AT_Utils
+	url = git@github.com:allista/AT_Utils.git
+[submodule "GroundConstruction"]
+	path = GroundConstruction
+	url = git@github.com:allista/GroundConstruction.git
