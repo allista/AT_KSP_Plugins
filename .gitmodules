@@ -10,3 +10,6 @@
 [submodule "GroundConstruction"]
 	path = GroundConstruction
 	url = git@github.com:allista/GroundConstruction.git
+[submodule "AutoLoadGame"]
+	path = AutoLoadGame
+	url = git@github.com:allista/AutoLoadGame.git
