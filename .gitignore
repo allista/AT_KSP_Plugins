@@ -3,3 +3,6 @@
 *.swp
 */bin/**
 */obj/**
+.idea
+.python-version
+UserPrefs.xml
