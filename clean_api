@@ -1,0 +1,148 @@
+#!/usr/bin/python
+# coding=utf-8
+
+"""
+Created on Feb 14, 2016
+
+@author: Allis Tauri <allista@gmail.com>
+"""
+
+from __future__ import print_function
+
+import os
+import re
+from subprocess import Popen, PIPE
+
+from BioUtils.Tools.Multiprocessing import parallelize_work, MPMain
+
+nonprit_hex = r'[%s]{1,2}' % ''.join(r'\x%02x' % i for i in range(32))
+single_chars = (1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31)
+single_re = re.compile(r'[%s]' % ''.join(r'\x%02x' % i for i in single_chars))
+token_re = re.compile(r'(?m)(\w+((<[\w., ]+>)?(\[\])? |\.))(?P<token>%s)(?P<tail>[;(.]| =)?' % nonprit_hex)
+ref_re = re.compile(r'(?m)(?:({0})\.)+({0})(?P<tail>[;(.]| =)?'.format(nonprit_hex))
+
+nl_re = re.compile(r'[\n\r]+')
+str_re1 = re.compile(r'u0006u0014.u0002\((\d+)\)')
+not_true_re = re.compile(r'\s*if \(!true\)\r*\n\s*{(\r*\n\s*[^}]*)+}', re.MULTILINE)
+switch_re = re.compile(r'switch \(\d+\)')
+
+
+# switch_re = re.compile(r'switch \(\d+\)\r*\n\s*'
+#                        r'{(\r*\n\s*[^}]*)+'
+#                        r'\r*\n\s*default:'
+#                        r'(?P<default>(\r*\n\s*[^}]*)+)'
+#                        r'\r*\n\s*break;'
+#                        r'\r*\n\s*}', re.MULTILINE)
+
+
+def token_to_hex(token):
+    return 'x' + ''.join('%02x' % ord(c) for c in token)
+
+
+def expr_to_hex(match):
+    token, tail = match.group('token', 'tail')
+    return ''.join((match.group(1), token_to_hex(token), tail if tail else ''))
+
+
+def ref_to_hex(match):
+    tail = match.group('tail')
+    tokens = [t for t in match.groups()[:-1] if t]
+    return ''.join(('.'.join(token_to_hex(token) for token in tokens),
+                    tail if tail else ''))
+
+
+def char_to_hex(match):
+    return token_to_hex(match.group())
+
+
+decoder_dir = os.path.abspath(u'./DecodeResources/bin/Release')
+decoder = 'DecodeResources.exe'
+
+
+class Main(MPMain):
+    description = 'Decodes strings from KSP resources in decompiled API files.'
+
+    @staticmethod
+    def decode_string(code):
+        os.chdir(decoder_dir)
+        try:
+            process = Popen('mono %s %s' % (decoder, code),
+                            stdout=PIPE, stderr=PIPE, shell=True)
+            process.wait()
+            if process.returncode != 0 and process.stderr:
+                print(process.stderr.read() + '\n')
+            return nl_re.sub(' ', process.stdout.read()).strip()
+        except Exception as e:
+            print(e)
+            return 'String not found'
+
+    def _main(self):
+        self.argument('apidir',
+                      type=str,
+                      help='Path to the KSP API directory.')
+        self.parse_args()
+
+        if not os.path.isdir(self.args.apidir):
+            print('No such directory: %s' % self.args.apidir)
+            return 1
+
+        decoder_exe = os.path.join(decoder_dir, decoder)
+        if not os.path.isfile(decoder_exe):
+            print('No such file: %s' % decoder_exe)
+            return 1
+
+        files = []
+        for dirpath, _dirnames, filenames in os.walk(self.args.apidir):
+            for filename in filenames:
+                if not filename.endswith('.cs'):
+                    continue
+                # print(len(files), filename)
+                files.append(os.path.abspath(os.path.join(dirpath, filename)))
+
+        if not files:
+            print('No .cs files were found in %s.' % self.args.apidir)
+            return 2
+
+        def worker(filepath):
+            with open(filepath, 'rb') as inp:
+                text = inp.read()
+            decoded = set()
+            for match in str_re1.finditer(text):
+                code = match.group(1)
+                if code in decoded:
+                    continue
+                code_str = '"%s"' % self.decode_string(code)
+                text = re.sub(r'u0006u0014.u0002\({}\)'.format(code), code_str, text)
+                decoded.add(code)
+            while True:
+                text, n = token_re.subn(expr_to_hex, text)
+                if not n:
+                    break
+            while True:
+                text, n = ref_re.subn(ref_to_hex, text)
+                if not n:
+                    break
+            while True:
+                text, n = single_re.subn(char_to_hex, text)
+                if not n:
+                    break
+            while True:
+                text, n = not_true_re.subn('', text)
+                if not n:
+                    break
+            while True:
+                text, n = switch_re.subn('switch (-1)', text)
+                if not n:
+                    break
+            with open(filepath, 'wb') as out:
+                out.write(text)
+
+        results = parallelize_work(self.abort_event, True, 1, worker, files)
+        if not results:
+            print('Error while decoding')
+        print('Done')
+        return 0
+
+
+if __name__ == '__main__':
+    Main(run=True)
