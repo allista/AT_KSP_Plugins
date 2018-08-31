@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2945DE97-3C4F-4D82-862E-51D67C3B274E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>DecodeResources</RootNamespace>
@@ -29,30 +27,35 @@
     <WarningLevel>4</WarningLevel>
     <Externalconsole>true</Externalconsole>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Nightbuild|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Nightbuild</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
-      <HintPath>..\..\KSP-test\KSP_test_1.1\KSP_Data\Managed\System.dll</HintPath>
+      <HintPath>..\..\KSP-test\KSP_test_1.4.5\KSP_Data\Managed\System.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>..\..\KSP-test\KSP_test_1.1\KSP_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>..\..\KSP-test\KSP_test_1.4.5\KSP_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\KSP-test\KSP_test_1.1\KSP_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\KSP-test\KSP_test_1.4.5\KSP_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\KSP-test\KSP_test_1.1\KSP_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\KSP-test\KSP_test_1.4.5\KSP_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml">
-      <HintPath>..\..\KSP-test\KSP_test_1.1\KSP_Data\Managed\System.Xml.dll</HintPath>
+      <HintPath>..\..\KSP-test\KSP_test_1.4.5\KSP_Data\Managed\System.Xml.dll</HintPath>
     </Reference>
     <Reference Include="System.Core">
-      <HintPath>..\..\KSP-test\KSP_test_1.1\KSP_Data\Managed\System.Core.dll</HintPath>
+      <HintPath>..\..\KSP-test\KSP_test_1.4.5\KSP_Data\Managed\System.Core.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Security">
-      <HintPath>..\..\KSP-test\KSP_test_1.1\KSP_Data\Managed\Mono.Security.dll</HintPath>
+      <HintPath>..\..\KSP-test\KSP_test_1.4.5\KSP_Data\Managed\Mono.Security.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
-      <HintPath>..\..\KSP-test\KSP_test_1.1\KSP_Data\Managed\Mono.Cecil.dll</HintPath>
+      <HintPath>..\..\KSP-test\KSP_test_1.4.5\KSP_Data\Managed\Mono.Cecil.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
