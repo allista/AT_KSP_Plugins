@@ -22,3 +22,13 @@ AllReleases
 **/bin/**
 *.dll
 *.zip
+
+UserPrefs.xml
+Assembly-CSharp.xml
+ActionGroupManager
+future-plans.graphml
+KSPAssets.xml
+packages
+*.unitypackage
+GroundConstruction.graphml
+
