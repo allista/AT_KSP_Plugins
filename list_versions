@@ -30,12 +30,14 @@ def _get_latest_tag(path):
     sorted_tags = sorted(repo.tags,
                          reverse=True,
                          key=lambda t: t.commit.authored_datetime)
-    history = [repo.head.commit]
+    history = []
     latest_tag = sorted_tags[0]
-    for commit in repo.head.commit.iter_parents():
-        if commit == latest_tag.commit:
-            break
-        history.append(commit)
+    if latest_tag.commit != repo.head.commit:
+        history.append(repo.head.commit)
+        for commit in repo.head.commit.iter_parents():
+            if commit == latest_tag.commit:
+                break
+            history.append(commit)
     return (latest_tag.path.replace('refs/tags/', ''),
             [f'{i + 1}: {commit.message}' for i, commit in enumerate(history)])
 
