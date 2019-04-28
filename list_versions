@@ -1,0 +1,74 @@
+#!/usr/bin/python3
+
+import argparse
+import os
+import re
+
+from git import Repo, InvalidGitRepositoryError
+
+AssemblyVersion_re = re.compile(r'\[assembly: +'
+                                r'AssemblyVersion\("(?P<version>\d+\.\d+(\.\d+(\.\d+)?)?)"\)\]')
+KSPVersion_re = re.compile(r'\[assembly: +'
+                           r'KSPAssembly\("\w+", +(?P<major>\d+), +(?P<minor>\d+)\)\]')
+
+
+def _get_latest_tag(path):
+    try:
+        repo = Repo(path, search_parent_directories=True)
+    except InvalidGitRepositoryError:
+        print('No git repo here')
+        return None, None
+    except Exception as e:
+        print(str(e))
+        return None, None
+    if repo.bare:
+        print('Bare repo')
+        return None, None
+    if not repo.tags:
+        print('No tags in this repo')
+        return None, None
+    sorted_tags = sorted(repo.tags,
+                         reverse=True,
+                         key=lambda t: t.commit.authored_datetime)
+    history = [repo.head.commit]
+    latest_tag = sorted_tags[0]
+    for commit in repo.head.commit.iter_parents():
+        if commit == latest_tag.commit:
+            break
+        history.append(commit)
+    return (latest_tag.path.replace('refs/tags/', ''),
+            [f'{i + 1}: {commit.message}' for i, commit in enumerate(history)])
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Lists current Assembly and KSPAssembly versions '
+                                                 'in AssemblyInfo.cs files')
+    parser.add_argument('paths', nargs='*', default=[],
+                        help='Paths to search for AssemblyInfo.cs files. '
+                             'If not provided, search starting from current directory.')
+    args = parser.parse_args()
+    cdir = os.path.abspath(os.curdir)
+    if not args.paths:
+        args.paths.append(cdir)
+    print('Searching for AssemblyInfo.cs files...')
+    for path in args.paths:
+        for dirname, dirs, files in os.walk(path):
+            for filename in files:
+                if filename != 'AssemblyInfo.cs':
+                    continue
+                filepath = os.path.join(dirname, filename)
+                with open(filepath, 'rt') as inp:
+                    text = inp.read()
+                ver = next(AssemblyVersion_re.finditer(text), None)
+                if ver:
+                    print(f'{os.path.relpath(filepath, cdir)}:\n'
+                          f'Assembly version: {ver.group("version")}')
+                    ksp_ver = next(KSPVersion_re.finditer(text), None)
+                    if ksp_ver:
+                        print(f'KSP assembly: {ksp_ver.group("major")}.{ksp_ver.group("minor")}')
+                    tag, history = _get_latest_tag(dirname)
+                    if tag:
+                        print(f'Latest git tag: {tag}')
+                        if history:
+                            print('History:\n' + ''.join(history))
+                    print()
