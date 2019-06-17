@@ -31,4 +31,5 @@ KSPAssets.xml
 packages
 *.unitypackage
 GroundConstruction.graphml
-
+venv
+HSV-Color-Picker-Unity
