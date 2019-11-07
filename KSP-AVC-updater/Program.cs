@@ -5,7 +5,7 @@
 //
 //  Copyright (c) 2016 Allis Tauri
 
-﻿using AT_Utils;
+using AT_Utils;
 
 namespace KSPAVCupdater
 {
