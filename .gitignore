@@ -34,3 +34,4 @@ GroundConstruction.graphml
 venv
 HSV-Color-Picker-Unity
 .idea
+*.exe
