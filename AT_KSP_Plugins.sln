@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCA.UI", "ThrottleControlle
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC.UI", "GroundConstruction\GC.UI\GC.UI.csproj", "{55E33136-32BD-4C5F-979D-D8AC9170E41E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CargoAccelerators", "CargoAccelerators\CargoAccelerators.csproj", "{A6814241-95EE-4CD2-9253-6F8370E5BE6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -161,6 +163,14 @@ Global
 		{55E33136-32BD-4C5F-979D-D8AC9170E41E}.debug_verbose|Any CPU.Build.0 = Debug|Any CPU
 		{55E33136-32BD-4C5F-979D-D8AC9170E41E}.Nightbuild|Any CPU.ActiveCfg = Nightbuild|Any CPU
 		{55E33136-32BD-4C5F-979D-D8AC9170E41E}.Nightbuild|Any CPU.Build.0 = Nightbuild|Any CPU
+		{A6814241-95EE-4CD2-9253-6F8370E5BE6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6814241-95EE-4CD2-9253-6F8370E5BE6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6814241-95EE-4CD2-9253-6F8370E5BE6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6814241-95EE-4CD2-9253-6F8370E5BE6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6814241-95EE-4CD2-9253-6F8370E5BE6F}.Nightbuild|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6814241-95EE-4CD2-9253-6F8370E5BE6F}.Nightbuild|Any CPU.Build.0 = Debug|Any CPU
+		{A6814241-95EE-4CD2-9253-6F8370E5BE6F}.debug_verbose|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6814241-95EE-4CD2-9253-6F8370E5BE6F}.debug_verbose|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

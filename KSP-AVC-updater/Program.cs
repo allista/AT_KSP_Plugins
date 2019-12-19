@@ -9,15 +9,16 @@ using AT_Utils;
 
 namespace KSPAVCupdater
 {
-	class MainClass
-	{
-		public static void Main(string[] args)
-		{
-			KSP_AVC_Updater.UpdateFor(new AT_Utils.ModInfo(), 
-			                          new AT_Utils.CCModInfo(),
-			                          new AtHangar.ModInfo(),
-			                          new ThrottleControlledAvionics.ModInfo(),
-			                          new GroundConstruction.ModInfo());
-		}
-	}
+    class MainClass
+    {
+        public static void Main(string[] args)
+        {
+            KSP_AVC_Updater.UpdateFor(new ModInfo(),
+                new CCModInfo(),
+                new AtHangar.ModInfo(),
+                new ThrottleControlledAvionics.ModInfo(),
+                new GroundConstruction.ModInfo(),
+                new CargoAccelerators.ModInfo());
+        }
+    }
 }
