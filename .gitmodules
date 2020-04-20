@@ -13,3 +13,6 @@
 [submodule "AutoLoadGame"]
 	path = AutoLoadGame
 	url = git@github.com:allista/AutoLoadGame.git
+[submodule "CargoAccelerators"]
+	path = CargoAccelerators
+	url = git@github.com:allista/CargoAccelerators
