@@ -9,7 +9,7 @@ using AT_Utils;
 
 namespace KSPAVCupdater
 {
-    class MainClass
+    internal static class MainClass
     {
         public static void Main(string[] args)
         {
@@ -18,7 +18,8 @@ namespace KSPAVCupdater
                 new AtHangar.ModInfo(),
                 new ThrottleControlledAvionics.ModInfo(),
                 new GroundConstruction.ModInfo(),
-                new CargoAccelerators.ModInfo());
+                new CargoAccelerators.ModInfo(),
+                new AutoLoadGame.ModInfo());
         }
     }
 }
