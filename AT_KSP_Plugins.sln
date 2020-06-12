@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CargoAccelerators", "CargoA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CA.UI", "CargoAccelerators\CA.UI\CA.UI.csproj", "{E7F9D401-ECAF-4F0E-8527-B14D67420A6A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CC.UI", "AT_Utils\ConfigurableContainers\CC.UI\CC.UI.csproj", "{3E7AA3AB-1064-4A2E-9D8F-0E20B83A2249}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -181,6 +183,14 @@ Global
 		{E7F9D401-ECAF-4F0E-8527-B14D67420A6A}.Nightbuild|Any CPU.Build.0 = Debug|Any CPU
 		{E7F9D401-ECAF-4F0E-8527-B14D67420A6A}.debug_verbose|Any CPU.ActiveCfg = Debug|Any CPU
 		{E7F9D401-ECAF-4F0E-8527-B14D67420A6A}.debug_verbose|Any CPU.Build.0 = Debug|Any CPU
+		{3E7AA3AB-1064-4A2E-9D8F-0E20B83A2249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E7AA3AB-1064-4A2E-9D8F-0E20B83A2249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E7AA3AB-1064-4A2E-9D8F-0E20B83A2249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E7AA3AB-1064-4A2E-9D8F-0E20B83A2249}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E7AA3AB-1064-4A2E-9D8F-0E20B83A2249}.Nightbuild|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E7AA3AB-1064-4A2E-9D8F-0E20B83A2249}.Nightbuild|Any CPU.Build.0 = Debug|Any CPU
+		{3E7AA3AB-1064-4A2E-9D8F-0E20B83A2249}.debug_verbose|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E7AA3AB-1064-4A2E-9D8F-0E20B83A2249}.debug_verbose|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
