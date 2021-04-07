@@ -36,3 +36,4 @@ HSV-Color-Picker-Unity
 .idea
 *.exe
 /Misc
+/AT_KSP_Plugins.sln.DotSettings*
