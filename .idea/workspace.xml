@@ -3,76 +3,59 @@
   <component name="ChangeListManager">
     <list default="true" id="16b512e3-b7ad-44d9-a566-9a1d565f6522" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/AT_KSP_Plugins.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AT_KSP_Plugins.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AT_Utils" beforeDir="false" afterPath="$PROJECT_DIR$/AT_Utils" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GroundConstruction" beforeDir="false" afterPath="$PROJECT_DIR$/GroundConstruction" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hangar" beforeDir="false" afterPath="$PROJECT_DIR$/Hangar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AT_Utils/ConfigurableContainers" beforeDir="false" afterPath="$PROJECT_DIR$/AT_Utils/ConfigurableContainers" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AT_Utils/ConfigurableContainers/GameData/ConfigurableContainers/ConfigurableContainers.version" beforeDir="false" afterPath="$PROJECT_DIR$/AT_Utils/ConfigurableContainers/GameData/ConfigurableContainers/ConfigurableContainers.version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AT_Utils/ConfigurableContainers/Properties/AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AT_Utils/ConfigurableContainers/Properties/AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AT_Utils/GameData/000_AT_Utils/000_AT_Utils.version" beforeDir="false" afterPath="$PROJECT_DIR$/AT_Utils/GameData/000_AT_Utils/000_AT_Utils.version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AT_Utils/Properties/AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AT_Utils/Properties/AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutoLoadGame/Properties/AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AutoLoadGame/Properties/AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CargoAccelerators" beforeDir="false" afterPath="$PROJECT_DIR$/CargoAccelerators" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CargoAccelerators/Properties/AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CargoAccelerators/Properties/AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroundConstruction/Properties/AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GroundConstruction/Properties/AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hangar/Source/Properties/AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hangar/Source/Properties/AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ThrottleControlledAvionics" beforeDir="false" afterPath="$PROJECT_DIR$/ThrottleControlledAvionics" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ThrottleControlledAvionics/AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ThrottleControlledAvionics/AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ThrottleControlledAvionics/GameData/ThrottleControlledAvionics/ThrottleControlledAvionics.version" beforeDir="false" afterPath="$PROJECT_DIR$/ThrottleControlledAvionics/GameData/ThrottleControlledAvionics/ThrottleControlledAvionics.version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/change_KSP_AVC_version_info" beforeDir="false" afterPath="$PROJECT_DIR$/change_KSP_AVC_version_info" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AT_Utils/ConfigurableContainers/PatchContainers.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="195" column="68" selection-start-line="195" selection-start-column="68" selection-end-line="195" selection-end-column="68" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/lib/python3.6/posixpath.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="95" selection-start-line="95" selection-end-line="95" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../KSP-Development/PyKSPutils/KSPUtils/ConfigNode.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="84" column="79" selection-start-line="84" selection-start-column="79" selection-end-line="84" selection-end-column="79" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/lib/python3.6/codecs.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="323" selection-start-line="323" selection-end-line="323" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../KSP-Development/PyKSPutils/KSPUtils/Objects.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="75" column="23" selection-start-line="75" selection-start-column="23" selection-end-line="75" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>open(</find>
     </findStrings>
   </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../KSP-Development/PyKSPutils" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -90,6 +73,7 @@
     <option name="width" value="1922" />
     <option name="height" value="1080" />
   </component>
+  <component name="ProjectId" id="1peOJCpnI6IoSmTo1rmGj03etpK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -146,25 +130,26 @@
       </pane>
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../KSP-Development/PyKSPutils" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Python.PatchContainers">
+  <component name="RunManager" selected="Python.change_KSP_AVC_version_info">
     <configuration name="PatchContainers" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="AT_KSP_Plugins" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -177,7 +162,30 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AT_Utils/ConfigurableContainers/PatchContainers.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="change_KSP_AVC_version_info" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="AT_KSP_Plugins" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/change_KSP_AVC_version_info" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -198,6 +206,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/list_versions" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -209,11 +218,13 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.change_KSP_AVC_version_info" />
         <item itemvalue="Python.PatchContainers" />
         <item itemvalue="Python.list_versions" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="16b512e3-b7ad-44d9-a566-9a1d565f6522" name="Default Changelist" comment="" />
@@ -221,6 +232,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1556439200676</updated>
+      <workItem from="1615540025347" duration="2708000" />
     </task>
     <servers />
   </component>
@@ -250,6 +262,12 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="ReST Console" order="3" />
     </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/AT_KSP_Plugins$change_KSP_AVC_version_info.coverage" NAME="change_KSP_AVC_version_info Coverage Results" MODIFIED="1615542053408" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/list_versions">
