@@ -35,3 +35,4 @@ venv
 HSV-Color-Picker-Unity
 .idea
 *.exe
+/Misc
