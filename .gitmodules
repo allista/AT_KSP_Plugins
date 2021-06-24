@@ -16,3 +16,6 @@
 [submodule "CargoAccelerators"]
 	path = CargoAccelerators
 	url = git@github.com:allista/CargoAccelerators
+[submodule "PyKSPutils"]
+	path = PyKSPutils
+	url = git@github.com:allista/PyKSPutils.git
