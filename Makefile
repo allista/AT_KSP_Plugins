@@ -13,6 +13,7 @@
 	git-status \
 	latest-git-tags \
 	tag-versions \
+	remove-latest-tags \
 	push-to-develop \
 	push-to-master \
 	push-master-to-develop \
@@ -22,7 +23,8 @@
 	check-packages \
 	merge-build-and-tag-releases \
 	package-releases \
-	release
+	release \
+	rollback-merge-and-tags
 
 SKIP_REPOS = "UI/HSV-Color-Picker-Unity"|PyKSPutils
 
@@ -91,7 +93,10 @@ latest-git-tags:
 	$(GIT_SUB:COMMAND=git describe --abbrev=0 --tags --always)
 
 tag-versions:
-	$(GIT_SUB:COMMAND=git_tag_by_assembly_info --add-search-path Source)
+	$(GIT_SUB:COMMAND=git_tag_by_assembly_info --add-search-path Source create)
+
+remove-latest-tags:
+	$(GIT_SUB:COMMAND=git_tag_by_assembly_info --add-search-path Source remove || :)
 
 PUSH_TO_DEVELOP=git push -f --tags origin development:development
 push-to-develop:
@@ -158,3 +163,7 @@ release: \
 	push-to-master \
 	push-master-to-develop \
 	merge-develop-of-master-repo
+
+rollback-merge-and-tags: \
+	reset-master-to-origin \
+	remove-latest-tags
