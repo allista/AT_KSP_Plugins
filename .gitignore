@@ -34,4 +34,7 @@ GroundConstruction.graphml
 venv
 HSV-Color-Picker-Unity
 .idea
+.vscode
 *.exe
+/Misc
+/AT_KSP_Plugins.sln.DotSettings*
