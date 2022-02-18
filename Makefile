@@ -106,7 +106,9 @@ PUSH_TO_MASTER=git push --tags origin master:master
 push-to-master:
 	$(GIT_SUB:COMMAND=$(PUSH_TO_MASTER))
 
-PUSH_MASTER_TO_DEVELOP=git push --tags origin master:development
+PUSH_MASTER_TO_DEVELOP= \
+	git push --tags origin master:development && \
+	git fetch origin development:development
 push-master-to-develop:
 	$(GIT_SUB:COMMAND=$(PUSH_MASTER_TO_DEVELOP))
 
