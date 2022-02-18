@@ -84,7 +84,7 @@ to-develop:
 	$(GIT_SUB:COMMAND=git checkout development)
 
 to-develop-all: to-develop
-	git checkout develop
+	git checkout development
 
 git-status:
 	$(GIT_SUB:COMMAND=git status -s -b -uno)
