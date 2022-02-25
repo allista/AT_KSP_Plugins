@@ -53,6 +53,9 @@ check-project-for-merge:
 check-project-for-release:
 	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) for-release)
 
+show-project-versions:
+	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) show-versions)
+
 # msbuild tasks
 
 BUILD = msbuild -m ./AT_KSP_Plugins.sln
