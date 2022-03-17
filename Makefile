@@ -1,6 +1,7 @@
 ﻿.PHONY: \
-	check-project-for-merge \
-	check-project-for-release \
+	check-master-repo-clean \
+	check-projects-for-merge \
+	check-projects-for-release \
 	build-debug \
 	build-night \
 	build-release \
@@ -47,15 +48,17 @@ GIT_SUB := $(GIT_SUB_DF:COMMAND=$(CASE_CMD))
 
 CHECK_PROJECT = check_project
 
-check-project-for-merge:
+check-master-repo-clean:
 	git diff
 	git diff --quiet
+
+check-projects-for-merge: check-master-repo-clean
 	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) for-merge)
 
-check-project-for-release:
+check-projects-for-release:
 	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) for-release)
 
-show-project-versions:
+show-versions:
 	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) show-versions)
 
 # msbuild tasks
@@ -124,13 +127,13 @@ COMMIT_AND_MERGE = \
 merge-develop: \
 	to-develop \
 	rebuild-release \
-	check-project-for-merge \
+	check-projects-for-merge \
 	push-to-develop \
 	to-master
 	$(GIT_SUB:COMMAND=$(COMMIT_AND_MERGE))
 
 merge-develop-of-master-repo: \
-	check-project-for-release
+	check-projects-for-release
 	git checkout master
 	$(COMMIT_AND_MERGE)
 	git tag `date +%Y%m%d`
@@ -162,7 +165,7 @@ merge-build-and-tag-releases: \
 	tag-versions
 
 package-releases: \
-	check-project-for-release \
+	check-projects-for-release \
 	build-packages \
 	check-packages
 
