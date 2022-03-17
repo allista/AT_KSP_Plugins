@@ -38,3 +38,4 @@ HSV-Color-Picker-Unity
 *.exe
 /Misc
 /AT_KSP_Plugins.sln.DotSettings*
+*.code-workspace
