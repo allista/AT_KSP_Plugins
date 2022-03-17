@@ -21,6 +21,8 @@
 	reset-master-to-origin \
 	build-packages \
 	check-packages \
+	publish-releases-github \
+	publish-releases-spacedock \
 	merge-build-and-tag-releases \
 	package-releases \
 	release \
@@ -43,7 +45,7 @@ GIT_SUB := $(GIT_SUB_DF:COMMAND=$(CASE_CMD))
 
 # project checks
 
-CHECK_PROJECT = check_project --add-search-path Source
+CHECK_PROJECT = check_project
 
 check-project-for-merge:
 	git diff
@@ -140,17 +142,19 @@ reset-master-to-origin: to-develop
 
 # packaging
 
-RELEASES = $(realpath ./AllReleases)
-OLD_RELEASES = $(RELEASES)/old
+BUILD_PACKAGE=stat ./make-release.sh && ./make-release.sh || :
 
 build-packages:
-	python3 ./make_releases
-	mkdir -p $(RELEASES)
-	mv $(RELEASES)/*.zip $(OLD_RELEASES)
-	python3 ./gather_releases
+	$(GIT_SUB:COMMAND=$(BUILD_PACKAGE))
 
 check-packages:
-	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) check-archive --only-if-exists make-release.sh $(RELEASES))
+	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) check-archive)
+
+publish-releases-github:
+	$(GIT_SUB:COMMAND=publish_release github upload || :)
+
+publish-releases-spacedock:
+	$(GIT_SUB:COMMAND=publish_release github spacedock || :)
 
 merge-build-and-tag-releases: \
 	merge-develop \
@@ -167,7 +171,9 @@ release: \
 	package-releases \
 	push-to-master \
 	push-master-to-develop \
-	merge-develop-of-master-repo
+	merge-develop-of-master-repo \
+	publish-releases-github \
+	publish-releases-spacedock
 
 rollback-merge-and-tags: \
 	reset-master-to-origin \
