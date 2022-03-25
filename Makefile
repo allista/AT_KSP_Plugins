@@ -119,6 +119,7 @@ remove-latest-tags:
 PUSH_TO_DEVELOP=git push -f --tags origin development:development
 push-to-develop:
 	$(GIT_SUB:COMMAND=$(PUSH_TO_DEVELOP))
+	$(PUSH_TO_DEVELOP)
 
 PUSH_TO_MASTER=git push --tags origin master:master
 push-to-master:
