@@ -29,6 +29,8 @@
 	release \
 	rollback-merge-and-tags
 
+ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+
 SKIP_REPOS = "UI/HSV-Color-Picker-Unity"|PyKSPutils
 
 GIT_SUB_DF = git submodule foreach 'git submodule foreach '"'"' COMMAND '"'"' && COMMAND '
@@ -46,7 +48,8 @@ GIT_SUB := $(GIT_SUB_DF:COMMAND=$(CASE_CMD))
 
 # project checks
 
-CHECK_PROJECT = check_project
+CHECK_PROJECT = $(ROOT_DIR)/venv/bin/check_project
+PUBLISH_RELEASE = $(ROOT_DIR)/venv/bin/publish_release
 
 check-master-repo-clean:
 	git diff
@@ -148,16 +151,16 @@ reset-master-to-origin: to-develop
 BUILD_PACKAGE=stat ./make-release.sh && ./make-release.sh || :
 
 build-packages:
-	$(GIT_SUB:COMMAND=$(BUILD_PACKAGE))
+	. venv/bin/activate && $(GIT_SUB:COMMAND=$(BUILD_PACKAGE))
 
 check-packages:
 	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) check-archive)
 
 publish-releases-github:
-	$(GIT_SUB:COMMAND=publish_release github upload || :)
+	$(GIT_SUB:COMMAND=$(PUBLISH_RELEASE) github upload || :)
 
 publish-releases-spacedock:
-	$(GIT_SUB:COMMAND=publish_release github spacedock || :)
+	$(GIT_SUB:COMMAND=$(PUBLISH_RELEASE) github spacedock || :)
 
 merge-build-and-tag-releases: \
 	merge-develop \
