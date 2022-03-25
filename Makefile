@@ -53,7 +53,7 @@ PUBLISH_RELEASE = $(ROOT_DIR)/venv/bin/publish_release
 
 venv: requirements.txt PyKSPutils/requirements.txt PyKSPutils/requirements-dev.txt
 	python -m venv $(ROOT_DIR)/venv
-	pip install -U pip setup_tools
+	pip install -U pip setuptools
 	pip install -r requirements.txt
 	pip install -r PyKSPutils/requirements-dev.txt
 	touch $(ROOT_DIR)/venv
