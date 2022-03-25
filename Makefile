@@ -169,6 +169,9 @@ publish-releases-github: venv
 publish-releases-spacedock: venv
 	$(GIT_SUB:COMMAND=$(PUBLISH_RELEASE) github spacedock || :)
 
+update-releases-github: venv
+	$(GIT_SUB:COMMAND=$(PUBLISH_RELEASE) github upload --update || :)
+
 merge-build-and-tag-releases: \
 	merge-develop \
 	rebuild-release \
