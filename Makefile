@@ -51,17 +51,24 @@ GIT_SUB := $(GIT_SUB_DF:COMMAND=$(CASE_CMD))
 CHECK_PROJECT = $(ROOT_DIR)/venv/bin/check_project
 PUBLISH_RELEASE = $(ROOT_DIR)/venv/bin/publish_release
 
+venv: requirements.txt PyKSPutils/requirements.txt PyKSPutils/requirements-dev.txt
+	python -m venv $(ROOT_DIR)/venv
+	pip install -U pip setup_tools
+	pip install -r requirements.txt
+	pip install -r PyKSPutils/requirements-dev.txt
+	touch $(ROOT_DIR)/venv
+
 check-master-repo-clean:
 	git diff
 	git diff --quiet
 
-check-projects-for-merge: check-master-repo-clean
+check-projects-for-merge: venv check-master-repo-clean
 	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) for-merge)
 
-check-projects-for-release:
+check-projects-for-release: venv
 	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) for-release)
 
-show-versions:
+show-versions: venv
 	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) show-versions)
 
 # msbuild tasks
@@ -150,16 +157,16 @@ reset-master-to-origin: to-develop
 
 BUILD_PACKAGE=stat ./make-release.sh && ./make-release.sh || :
 
-build-packages:
+build-packages: venv
 	. venv/bin/activate && $(GIT_SUB:COMMAND=$(BUILD_PACKAGE))
 
-check-packages:
+check-packages: venv
 	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) check-archive)
 
-publish-releases-github:
+publish-releases-github: venv
 	$(GIT_SUB:COMMAND=$(PUBLISH_RELEASE) github upload || :)
 
-publish-releases-spacedock:
+publish-releases-spacedock: venv
 	$(GIT_SUB:COMMAND=$(PUBLISH_RELEASE) github spacedock || :)
 
 merge-build-and-tag-releases: \
