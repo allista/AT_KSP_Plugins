@@ -109,6 +109,9 @@ to-develop-all: to-develop
 git-status:
 	$(GIT_SUB:COMMAND=git status -s -b -uno)
 
+git-changelog:
+	$(GIT_SUB:COMMAND=git changelog -n -p -x)
+
 latest-git-tags:
 	$(GIT_SUB:COMMAND=git describe --abbrev=0 --tags --always)
 
