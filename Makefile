@@ -54,7 +54,7 @@ PIP = $(ROOT_DIR)/venv/bin/pip
 PYTHON = $(ROOT_DIR)/venv/bin/python
 
 venv: requirements.txt PyKSPutils/requirements.txt PyKSPutils/requirements-dev.txt
-	python -m venv $(ROOT_DIR)/venv
+	[ -d "$(ROOT_DIR)/venv" ] || python -m venv $(ROOT_DIR)/venv
 	$(PIP) install -U pip setuptools
 	$(PIP) install -r requirements.txt
 	$(PIP) install -r PyKSPutils/requirements-dev.txt
