@@ -50,12 +50,14 @@ GIT_SUB := $(GIT_SUB_DF:COMMAND=$(CASE_CMD))
 
 CHECK_PROJECT = $(ROOT_DIR)/venv/bin/check_project
 PUBLISH_RELEASE = $(ROOT_DIR)/venv/bin/publish_release
+PIP = $(ROOT_DIR)/venv/bin/pip
+PYTHON = $(ROOT_DIR)/venv/bin/python
 
 venv: requirements.txt PyKSPutils/requirements.txt PyKSPutils/requirements-dev.txt
 	python -m venv $(ROOT_DIR)/venv
-	pip install -U pip setuptools
-	pip install -r requirements.txt
-	pip install -r PyKSPutils/requirements-dev.txt
+	$(PIP) install -U pip setuptools
+	$(PIP) install -r requirements.txt
+	$(PIP) install -r PyKSPutils/requirements-dev.txt
 	touch $(ROOT_DIR)/venv
 
 check-master-repo-clean:
