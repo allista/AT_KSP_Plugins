@@ -50,6 +50,7 @@ GIT_SUB := $(GIT_SUB_DF:COMMAND=$(CASE_CMD))
 
 CHECK_PROJECT = $(ROOT_DIR)/venv/bin/check_project
 PUBLISH_RELEASE = $(ROOT_DIR)/venv/bin/publish_release
+MAKE_RELEASE = $(ROOT_DIR)/venv/bin/make_mod_release create
 PIP = $(ROOT_DIR)/venv/bin/pip
 PYTHON = $(ROOT_DIR)/venv/bin/python
 
@@ -161,10 +162,8 @@ reset-master-to-origin: to-develop
 
 # packaging
 
-BUILD_PACKAGE=stat ./make-release.sh && ./make-release.sh || :
-
 build-packages: venv
-	. venv/bin/activate && $(GIT_SUB:COMMAND=$(BUILD_PACKAGE))
+	$(GIT_SUB:COMMAND=$(MAKE_RELEASE))
 
 check-packages: venv
 	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) check-archive)
