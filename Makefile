@@ -48,13 +48,11 @@ GIT_SUB := $(GIT_SUB_DF:COMMAND=$(CASE_CMD))
 
 # project checks
 
-CHECK_PROJECT = $(ROOT_DIR)/venv/bin/check_project
-PUBLISH_RELEASE = $(ROOT_DIR)/venv/bin/publish_release
-MAKE_RELEASE = $(ROOT_DIR)/venv/bin/make_mod_release create
+KSP_PLUGIN_CMD = $(ROOT_DIR)/venv/bin/ksp_plugin
 PIP = $(ROOT_DIR)/venv/bin/pip
 PYTHON = $(ROOT_DIR)/venv/bin/python
 
-venv: requirements.txt PyKSPutils/requirements.txt PyKSPutils/requirements-dev.txt
+venv: requirements.txt PyKSPutils/setup.py PyKSPutils/requirements.txt PyKSPutils/requirements-dev.txt
 	[ -d "$(ROOT_DIR)/venv" ] || python -m venv $(ROOT_DIR)/venv
 	$(PIP) install -U pip setuptools
 	$(PIP) install -r requirements.txt
@@ -66,13 +64,13 @@ check-master-repo-clean:
 	git diff --quiet
 
 check-projects-for-merge: venv check-master-repo-clean
-	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) for-merge)
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) check for-merge)
 
 check-projects-for-release: venv
-	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) for-release)
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) check for-release)
 
-show-versions: venv
-	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) show-versions)
+show-info: venv
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) info)
 
 # msbuild tasks
 
@@ -117,10 +115,10 @@ latest-git-tags:
 	$(GIT_SUB:COMMAND=git describe --abbrev=0 --tags --always)
 
 tag-versions:
-	$(GIT_SUB:COMMAND=git_tag_by_assembly_info --add-search-path Source create)
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) create tag-by-version)
 
 remove-latest-tags:
-	$(GIT_SUB:COMMAND=git_tag_by_assembly_info --add-search-path Source remove || :)
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) remove tag-by-version || :)
 
 PUSH_TO_DEVELOP=git push -f --tags origin development:development
 push-to-develop:
@@ -163,19 +161,19 @@ reset-master-to-origin: to-develop
 # packaging
 
 build-packages: venv
-	$(GIT_SUB:COMMAND=$(MAKE_RELEASE))
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) create archive)
 
 check-packages: venv
-	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) check-archive)
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) check archive)
 
 publish-releases-github: venv
-	$(GIT_SUB:COMMAND=$(PUBLISH_RELEASE) github upload || :)
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) github upload || :)
 
 publish-releases-spacedock: venv
-	$(GIT_SUB:COMMAND=$(PUBLISH_RELEASE) github spacedock || :)
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) spacedock upload || :)
 
 update-releases-github: venv
-	$(GIT_SUB:COMMAND=$(PUBLISH_RELEASE) github upload --update || :)
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) github upload --update || :)
 
 merge-build-and-tag-releases: \
 	merge-develop \
