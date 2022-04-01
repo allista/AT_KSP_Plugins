@@ -1,6 +1,7 @@
 ﻿.PHONY: \
-	check-project-for-merge \
-	check-project-for-release \
+	check-master-repo-clean \
+	check-projects-for-merge \
+	check-projects-for-release \
 	build-debug \
 	build-night \
 	build-release \
@@ -19,12 +20,19 @@
 	push-master-to-develop \
 	merge-develop \
 	reset-master-to-origin \
+	new-changelog-entries \
+	create-changelogs \
+	reformat-changelogs \
 	build-packages \
 	check-packages \
+	publish-releases-github \
+	publish-releases-spacedock \
 	merge-build-and-tag-releases \
 	package-releases \
 	release \
 	rollback-merge-and-tags
+
+ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 SKIP_REPOS = "UI/HSV-Color-Picker-Unity"|PyKSPutils
 
@@ -43,15 +51,29 @@ GIT_SUB := $(GIT_SUB_DF:COMMAND=$(CASE_CMD))
 
 # project checks
 
-CHECK_PROJECT = check_project --add-search-path Source
+KSP_PLUGIN_CMD = $(ROOT_DIR)/venv/bin/ksp_plugin
+PIP = $(ROOT_DIR)/venv/bin/pip
+PYTHON = $(ROOT_DIR)/venv/bin/python
 
-check-project-for-merge:
+venv: requirements.txt PyKSPutils/setup.py PyKSPutils/requirements.txt PyKSPutils/requirements-dev.txt
+	[ -d "$(ROOT_DIR)/venv" ] || python -m venv $(ROOT_DIR)/venv
+	$(PIP) install -U pip setuptools
+	$(PIP) install -r requirements.txt
+	$(PIP) install -r PyKSPutils/requirements-dev.txt
+	touch $(ROOT_DIR)/venv
+
+check-master-repo-clean:
 	git diff
 	git diff --quiet
-	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) for-merge)
 
-check-project-for-release:
-	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) for-release)
+check-projects-for-merge: venv check-master-repo-clean
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) check for-merge)
+
+check-projects-for-release: venv
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) check for-release)
+
+show-info: venv
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) info)
 
 # msbuild tasks
 
@@ -84,29 +106,35 @@ to-develop:
 	$(GIT_SUB:COMMAND=git checkout development)
 
 to-develop-all: to-develop
-	git checkout develop
+	git checkout development
 
 git-status:
 	$(GIT_SUB:COMMAND=git status -s -b -uno)
+
+git-changelog:
+	$(GIT_SUB:COMMAND=git changelog -n -p -x)
 
 latest-git-tags:
 	$(GIT_SUB:COMMAND=git describe --abbrev=0 --tags --always)
 
 tag-versions:
-	$(GIT_SUB:COMMAND=git_tag_by_assembly_info --add-search-path Source create)
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) create tag-by-version)
 
 remove-latest-tags:
-	$(GIT_SUB:COMMAND=git_tag_by_assembly_info --add-search-path Source remove || :)
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) remove tag-by-version || :)
 
 PUSH_TO_DEVELOP=git push -f --tags origin development:development
 push-to-develop:
 	$(GIT_SUB:COMMAND=$(PUSH_TO_DEVELOP))
+	$(PUSH_TO_DEVELOP)
 
 PUSH_TO_MASTER=git push --tags origin master:master
 push-to-master:
 	$(GIT_SUB:COMMAND=$(PUSH_TO_MASTER))
 
-PUSH_MASTER_TO_DEVELOP=git push --tags origin master:development
+PUSH_MASTER_TO_DEVELOP= \
+	git push --tags origin master:development && \
+	git fetch origin development:development
 push-master-to-develop:
 	$(GIT_SUB:COMMAND=$(PUSH_MASTER_TO_DEVELOP))
 
@@ -117,13 +145,13 @@ COMMIT_AND_MERGE = \
 merge-develop: \
 	to-develop \
 	rebuild-release \
-	check-project-for-merge \
+	check-projects-for-merge \
 	push-to-develop \
 	to-master
 	$(GIT_SUB:COMMAND=$(COMMIT_AND_MERGE))
 
 merge-develop-of-master-repo: \
-	check-project-for-release
+	check-projects-for-release
 	git checkout master
 	$(COMMIT_AND_MERGE)
 	git tag `date +%Y%m%d`
@@ -133,19 +161,32 @@ merge-develop-of-master-repo: \
 reset-master-to-origin: to-develop
 	$(GIT_SUB:COMMAND=git fetch -f origin master:master)
 
+# change log
+new-changelog-entries: venv
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) create changelog-entry)
+
+create-changelogs: venv
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) create changelog)
+
+reformat-changelogs: venv
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) create changelog --reformat)
+
 # packaging
 
-RELEASES = $(realpath ./AllReleases)
-OLD_RELEASES = $(RELEASES)/old
+build-packages: venv
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) create archive)
 
-build-packages:
-	python3 ./make_releases
-	mkdir -p $(RELEASES)
-	mv $(RELEASES)/*.zip $(OLD_RELEASES)
-	python3 ./gather_releases
+check-packages: venv
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) check archive)
 
-check-packages:
-	$(GIT_SUB:COMMAND=$(CHECK_PROJECT) check-archive --only-if-exists make-release.sh $(RELEASES))
+publish-releases-github: venv
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) github upload || :)
+
+publish-releases-spacedock: venv
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) spacedock upload || :)
+
+update-releases-github: venv
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) github upload --update || :)
 
 merge-build-and-tag-releases: \
 	merge-develop \
@@ -153,7 +194,7 @@ merge-build-and-tag-releases: \
 	tag-versions
 
 package-releases: \
-	check-project-for-release \
+	check-projects-for-release \
 	build-packages \
 	check-packages
 
@@ -162,7 +203,9 @@ release: \
 	package-releases \
 	push-to-master \
 	push-master-to-develop \
-	merge-develop-of-master-repo
+	merge-develop-of-master-repo \
+	publish-releases-github \
+	publish-releases-spacedock
 
 rollback-merge-and-tags: \
 	reset-master-to-origin \

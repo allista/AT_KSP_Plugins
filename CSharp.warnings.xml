@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <NoWarn>IDE1006;IDE0008;IDE0022</NoWarn>
+    </PropertyGroup>
+</Project>
