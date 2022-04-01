@@ -35,7 +35,10 @@ venv
 HSV-Color-Picker-Unity
 .idea
 .vscode
+.vs
+*.code-workspace
 *.exe
 /Misc
 /AT_KSP_Plugins.sln.DotSettings*
-*.code-workspace
+.pytest_cache
+.mypy_cache
