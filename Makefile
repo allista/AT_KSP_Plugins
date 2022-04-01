@@ -20,6 +20,9 @@
 	push-master-to-develop \
 	merge-develop \
 	reset-master-to-origin \
+	new-changelog-entries \
+	create-changelogs \
+	reformat-changelogs \
 	build-packages \
 	check-packages \
 	publish-releases-github \
@@ -157,6 +160,16 @@ merge-develop-of-master-repo: \
 
 reset-master-to-origin: to-develop
 	$(GIT_SUB:COMMAND=git fetch -f origin master:master)
+
+# change log
+new-changelog-entries: venv
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) create changelog-entry)
+
+create-changelogs: venv
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) create changelog)
+
+reformat-changelogs: venv
+	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) create changelog --reformat)
 
 # packaging
 
