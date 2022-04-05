@@ -66,8 +66,12 @@ check-master-repo-clean:
 	git diff
 	git diff --quiet
 
+CHECK_FOR_MERGE_OR_RELEASE = \
+	$(KSP_PLUGIN_CMD) check for-merge || \
+	$(KSP_PLUGIN_CMD) check for-release --require-branch development
+
 check-projects-for-merge: venv check-master-repo-clean
-	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) check for-merge)
+	$(GIT_SUB:COMMAND=$(CHECK_FOR_MERGE_OR_RELEASE))
 
 check-projects-for-release: venv
 	$(GIT_SUB:COMMAND=$(KSP_PLUGIN_CMD) check for-release)
