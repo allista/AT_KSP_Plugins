@@ -138,9 +138,10 @@ PUSH_MASTER_TO_DEVELOP= \
 push-master-to-develop:
 	$(GIT_SUB:COMMAND=$(PUSH_MASTER_TO_DEVELOP))
 
-COMMIT_AND_MERGE = \
-	git commit -a -m "Updated submodules"; \
-	git merge development --no-ff -m "Merged development branch"
+COMMIT = git commit -a -m "Updated submodules"
+MERGE = git merge development --no-ff -m "Merged development branch"
+
+COMMIT_AND_MERGE = $(COMMIT); $(MERGE)
 
 merge-develop: \
 	to-develop \
@@ -153,8 +154,9 @@ merge-develop: \
 merge-develop-of-master-repo: \
 	check-projects-for-release
 	git checkout master
-	$(COMMIT_AND_MERGE)
-	git tag `date +%Y%m%d`
+	$(MERGE)
+	$(COMMIT) || :
+	[ -z `git tag --points-at` ] && git tag `date +%Y%m%d` || :
 	$(PUSH_TO_MASTER)
 	$(PUSH_MASTER_TO_DEVELOP)
 
